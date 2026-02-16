@@ -1,0 +1,42 @@
+@model IEnumerable<Face_Recognition.Models.FaceImage>
+
+@{
+    ViewData["Title"] = "Image Gallery";
+}
+
+<h2>Image Gallery</h2>
+
+@if (Model == null)
+{
+    <p>Model is null</p>
+}
+else if (!Model.Any())
+{
+    <p>No images found. Go to <a href="/Home/TakePicture">Take Picture</a> to capture some images.</p>
+}
+else
+{
+    <p>Total images: @Model.Count()</p>
+    
+    <div style="display:flex; flex-wrap:wrap; gap:10px;">
+        @foreach (var img in Model)
+        {
+            <div style="border:1px solid #ccc; padding:5px; margin-bottom:10px;">
+                <h4>Image ID: @img.Id</h4>
+                <p><strong>Created:</strong> @img.CreatedAt.ToString("g")</p>
+                <p><strong>Data Length:</strong> @img.ImageData.Length characters</p>
+                <p><strong>First 50 chars:</strong> @(img.ImageData.Length > 50 ? img.ImageData.Substring(0, 50) + "..." : img.ImageData)</p>
+                
+                @{
+                    var imageData = "data:image/jpeg;base64," + img.ImageData;
+                }
+                <div style="border:1px solid red; padding:5px;">
+                    <img src="@imageData" 
+                         style="width:200px; height:auto; display:block;" 
+                         onerror="this.style.display='none'; this.nextElementSibling.style.display='block';" />
+                    <div style="display:none; color:red; font-weight:bold;">❌ Image failed to load</div>
+                </div>
+            </div>
+        }
+    </div>
+}

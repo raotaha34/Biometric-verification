@@ -1,0 +1,122 @@
+﻿@{
+    ViewData["Title"] = "Take Picture";
+}
+
+<h2>Take Picture</h2>
+
+<video id="video" width="500" autoplay></video>
+<br />
+<button onclick="capture()" class="btn btn-primary mt-3">Capture</button>
+
+<button class="btn btn-success mt-3" onclick="window.location.href='/Home/Gallery'">View All Images</button>
+
+<img id="capturedImage" style="display:none; margin-top:10px; max-width:400px;" />
+<canvas id="canvas" style="display:none;"></canvas>
+
+<script>
+    let video, canvas, capturedImg;
+
+    // Function to start the camera
+    async function startCamera() {
+        try {
+            // Ask the user for permission to use the camera
+            const stream = await navigator.mediaDevices.getUserMedia({ video: true });
+            
+            // Display the camera feed in the <video> element
+            video = document.getElementById("video");
+            video.srcObject = stream;
+        } catch (err) {
+            // If the user denies permission or an error occurs
+            alert("Camera permission denied.");
+        }
+    }
+
+    // Function to capture a photo from the video feed
+    function capture() {
+        console.log('Capture button clicked');
+        
+        // Get elements once
+        if (!video) video = document.getElementById("video");
+        if (!canvas) canvas = document.getElementById("canvas");
+        if (!capturedImg) capturedImg = document.getElementById("capturedImage");
+        
+        // Check if elements exist
+        if (!video || !canvas || !capturedImg) {
+            console.error('Required elements not found');
+            alert('Page elements not loaded properly. Please refresh.');
+            return;
+        }
+        
+        console.log('Video element:', video);
+        console.log('Canvas element:', canvas);
+        console.log('Video dimensions:', video.videoWidth, 'x', video.videoHeight);
+
+        // Check if the video is ready
+        if (video.videoWidth === 0 || video.videoHeight === 0) {
+            alert("Camera not ready. Please wait a moment and try again.");
+            return;
+        }
+
+        try {
+            // Set canvas size to match video size
+            canvas.width = video.videoWidth;
+            canvas.height = video.videoHeight;
+            
+            console.log('Canvas dimensions set:', canvas.width, 'x', canvas.height);
+
+            // Draw the current video frame onto the canvas
+            const context = canvas.getContext("2d");
+            context.drawImage(video, 0, 0);
+            
+            console.log('Image drawn to canvas');
+
+            // Convert the canvas to a Base64 image
+            const imageData = canvas.toDataURL("image/jpeg");
+            console.log('Image data length:', imageData.length);
+
+            // Show the captured image immediately in an <img> element
+            capturedImg.src = imageData;
+            capturedImg.style.display = "block";
+            
+            console.log('Image displayed in preview');
+
+            // Send the image to the server
+            console.log('Sending image to server...');
+            fetch('/Home/SaveImage', {
+                method: 'POST',
+                headers: { 'Content-Type': 'application/json' },
+                body: JSON.stringify({ image: imageData })
+            })
+            .then(response => {
+                console.log('Server response status:', response.status);
+                if (!response.ok) {
+                    throw new Error('Network response was not ok');
+                }
+                return response.json();
+            })
+            .then(data => {
+                console.log('Save response:', data);
+                alert("Image saved successfully");
+            })
+            .catch(error => {
+                console.error('Error saving image:', error);
+                alert("Failed to save image: " + error.message);
+            });
+        } catch (error) {
+            console.error('Capture error:', error);
+            alert('Error capturing image: ' + error.message);
+        }
+    }
+
+    // Initialize elements when page loads
+    document.addEventListener('DOMContentLoaded', function() {
+        console.log('DOM loaded, initializing elements...');
+        video = document.getElementById("video");
+        canvas = document.getElementById("canvas");
+        capturedImg = document.getElementById("capturedImage");
+        
+        // Start camera
+        startCamera();
+    });
+</script>
+</script>
