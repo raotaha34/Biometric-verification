@@ -4,16 +4,10 @@ C:\Users\taha.ali\source\repos\Face Recognition\Face Recognition\bin\Debug\net10
 C:\Users\taha.ali\source\repos\Face Recognition\Face Recognition\bin\Debug\net10.0\Microsoft.EntityFrameworkCore.Abstractions.dll
 C:\Users\taha.ali\source\repos\Face Recognition\Face Recognition\bin\Debug\net10.0\Microsoft.EntityFrameworkCore.Relational.dll
 C:\Users\taha.ali\source\repos\Face Recognition\Face Recognition\bin\Debug\net10.0\Microsoft.EntityFrameworkCore.SqlServer.dll
-C:\Users\taha.ali\source\repos\Face Recognition\Face Recognition\bin\Debug\net10.0\System.Configuration.ConfigurationManager.dll
-C:\Users\taha.ali\source\repos\Face Recognition\Face Recognition\bin\Debug\net10.0\runtimes\win\lib\net9.0\Microsoft.Data.SqlClient.dll
-C:\Users\taha.ali\source\repos\Face Recognition\Face Recognition\bin\Debug\net10.0\runtimes\win-x64\native\Microsoft.Data.SqlClient.SNI.dll
 C:\Users\taha.ali\source\repos\Face Recognition\Face Recognition\bin\Debug\net10.0\appsettings.Development.json
 C:\Users\taha.ali\source\repos\Face Recognition\Face Recognition\bin\Debug\net10.0\appsettings.json
 C:\Users\taha.ali\source\repos\Face Recognition\Face Recognition\bin\Debug\net10.0\Face Recognition.staticwebassets.runtime.json
 C:\Users\taha.ali\source\repos\Face Recognition\Face Recognition\bin\Debug\net10.0\Face Recognition.staticwebassets.endpoints.json
-C:\Users\taha.ali\source\repos\Face Recognition\Face Recognition\bin\Debug\net10.0\Face Recognition.deps.json
-C:\Users\taha.ali\source\repos\Face Recognition\Face Recognition\bin\Debug\net10.0\Face Recognition.runtimeconfig.json
-C:\Users\taha.ali\source\repos\Face Recognition\Face Recognition\bin\Debug\net10.0\Face Recognition.pdb
 C:\Users\taha.ali\source\repos\Face Recognition\Face Recognition\bin\Debug\net10.0\Azure.Core.dll
 C:\Users\taha.ali\source\repos\Face Recognition\Face Recognition\bin\Debug\net10.0\Azure.Identity.dll
 C:\Users\taha.ali\source\repos\Face Recognition\Face Recognition\bin\Debug\net10.0\Humanizer.dll
@@ -48,6 +42,7 @@ C:\Users\taha.ali\source\repos\Face Recognition\Face Recognition\bin\Debug\net10
 C:\Users\taha.ali\source\repos\Face Recognition\Face Recognition\bin\Debug\net10.0\System.Composition.Hosting.dll
 C:\Users\taha.ali\source\repos\Face Recognition\Face Recognition\bin\Debug\net10.0\System.Composition.Runtime.dll
 C:\Users\taha.ali\source\repos\Face Recognition\Face Recognition\bin\Debug\net10.0\System.Composition.TypedParts.dll
+C:\Users\taha.ali\source\repos\Face Recognition\Face Recognition\bin\Debug\net10.0\System.Configuration.ConfigurationManager.dll
 C:\Users\taha.ali\source\repos\Face Recognition\Face Recognition\bin\Debug\net10.0\System.IdentityModel.Tokens.Jwt.dll
 C:\Users\taha.ali\source\repos\Face Recognition\Face Recognition\bin\Debug\net10.0\System.Memory.Data.dll
 C:\Users\taha.ali\source\repos\Face Recognition\Face Recognition\bin\Debug\net10.0\System.Security.Cryptography.ProtectedData.dll
@@ -130,7 +125,9 @@ C:\Users\taha.ali\source\repos\Face Recognition\Face Recognition\bin\Debug\net10
 C:\Users\taha.ali\source\repos\Face Recognition\Face Recognition\bin\Debug\net10.0\zh-Hans\Microsoft.Data.SqlClient.resources.dll
 C:\Users\taha.ali\source\repos\Face Recognition\Face Recognition\bin\Debug\net10.0\zh-Hant\Microsoft.Data.SqlClient.resources.dll
 C:\Users\taha.ali\source\repos\Face Recognition\Face Recognition\bin\Debug\net10.0\runtimes\unix\lib\net9.0\Microsoft.Data.SqlClient.dll
+C:\Users\taha.ali\source\repos\Face Recognition\Face Recognition\bin\Debug\net10.0\runtimes\win\lib\net9.0\Microsoft.Data.SqlClient.dll
 C:\Users\taha.ali\source\repos\Face Recognition\Face Recognition\bin\Debug\net10.0\runtimes\win-arm64\native\Microsoft.Data.SqlClient.SNI.dll
+C:\Users\taha.ali\source\repos\Face Recognition\Face Recognition\bin\Debug\net10.0\runtimes\win-x64\native\Microsoft.Data.SqlClient.SNI.dll
 C:\Users\taha.ali\source\repos\Face Recognition\Face Recognition\bin\Debug\net10.0\runtimes\win-x86\native\Microsoft.Data.SqlClient.SNI.dll
 C:\Users\taha.ali\source\repos\Face Recognition\Face Recognition\obj\Debug\net10.0\Face Recognition.csproj.AssemblyReference.cache
 C:\Users\taha.ali\source\repos\Face Recognition\Face Recognition\obj\Debug\net10.0\rpswa.dswa.cache.json
@@ -141,6 +138,7 @@ C:\Users\taha.ali\source\repos\Face Recognition\Face Recognition\obj\Debug\net10
 C:\Users\taha.ali\source\repos\Face Recognition\Face Recognition\obj\Debug\net10.0\Face Recognition.MvcApplicationPartsAssemblyInfo.cache
 C:\Users\taha.ali\source\repos\Face Recognition\Face Recognition\obj\Debug\net10.0\Face Recognition.RazorAssemblyInfo.cache
 C:\Users\taha.ali\source\repos\Face Recognition\Face Recognition\obj\Debug\net10.0\Face Recognition.RazorAssemblyInfo.cs
+C:\Users\taha.ali\source\repos\Face Recognition\Face Recognition\obj\Debug\net10.0\Face Recognition.sourcelink.json
 C:\Users\taha.ali\source\repos\Face Recognition\Face Recognition\obj\Debug\net10.0\rjimswa.dswa.cache.json
 C:\Users\taha.ali\source\repos\Face Recognition\Face Recognition\obj\Debug\net10.0\rjsmrazor.dswa.cache.json
 C:\Users\taha.ali\source\repos\Face Recognition\Face Recognition\obj\Debug\net10.0\rjsmcshtml.dswa.cache.json
@@ -220,6 +218,8 @@ C:\Users\taha.ali\source\repos\Face Recognition\Face Recognition\obj\Debug\net10
 C:\Users\taha.ali\source\repos\Face Recognition\Face Recognition\obj\Debug\net10.0\Face Recognition.dll
 C:\Users\taha.ali\source\repos\Face Recognition\Face Recognition\obj\Debug\net10.0\refint\Face Recognition.dll
 C:\Users\taha.ali\source\repos\Face Recognition\Face Recognition\obj\Debug\net10.0\Face Recognition.pdb
+C:\Users\taha.ali\source\repos\Face Recognition\Face Recognition\bin\Debug\net10.0\Face Recognition.deps.json
+C:\Users\taha.ali\source\repos\Face Recognition\Face Recognition\bin\Debug\net10.0\Face Recognition.runtimeconfig.json
+C:\Users\taha.ali\source\repos\Face Recognition\Face Recognition\bin\Debug\net10.0\Face Recognition.pdb
 C:\Users\taha.ali\source\repos\Face Recognition\Face Recognition\obj\Debug\net10.0\Face Recognition.genruntimeconfig.cache
 C:\Users\taha.ali\source\repos\Face Recognition\Face Recognition\obj\Debug\net10.0\ref\Face Recognition.dll
-C:\Users\taha.ali\source\repos\Face Recognition\Face Recognition\obj\Debug\net10.0\staticwebassets.upToDateCheck.txt

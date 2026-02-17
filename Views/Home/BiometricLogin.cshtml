@@ -1,0 +1,49 @@
+@{
+    ViewData["Title"] = "Biometric Login";
+}
+
+<h2>Biometric Login</h2>
+<video id="video" width="500" autoplay></video>
+<button onclick="capture()" class="btn btn-primary mt-3">Capture</button>
+<img id="capturedImage" style="display:none; max-width:400px;" />
+<canvas id="canvas" style="display:none;"></canvas>
+
+<script>
+let video, canvas, capturedImg;
+
+async function startCamera() {
+    const stream = await navigator.mediaDevices.getUserMedia({ video: true });
+    video = document.getElementById("video");
+    video.srcObject = stream;
+}
+
+function capture() {
+    canvas = document.getElementById("canvas");
+    capturedImg = document.getElementById("capturedImage");
+    canvas.width = video.videoWidth;
+    canvas.height = video.videoHeight;
+    canvas.getContext("2d").drawImage(video, 0, 0);
+    const imageData = canvas.toDataURL("image/jpeg");
+    capturedImg.src = imageData;
+    capturedImg.style.display = "block";
+
+    fetch('/Home/VerifyFace', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({ image: imageData })
+    })
+    .then(res => res.json())
+    .then(data => {
+        if (data.matchFound)
+            alert(`Welcome back! User ID: ${data.userId}`);
+        else
+            alert('No match found');
+    })
+    .catch(error => {
+        console.error('Error:', error);
+        alert('Face verification failed');
+    });
+}
+
+document.addEventListener('DOMContentLoaded', startCamera);
+</script>

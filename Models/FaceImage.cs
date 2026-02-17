@@ -8,6 +8,8 @@
             [Required]
             public string ImageData { get; set; } = string.Empty;
 
-        public DateTime CreatedAt { get; set; } = DateTime.Now;
+            public DateTime CreatedAt { get; set; } = DateTime.Now;
+
+           public byte[] FaceEmbedding { get; set; } =[];
         }
     }
