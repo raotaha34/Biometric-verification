@@ -1,0 +1,127 @@
+flask → create a small server (API) to talk to your MVC app.
+face_recognition → detects faces and generates embeddings.
+numpy → helps with math for embeddings.
+pillow → handle images in Python.
+pyodbc → connect to your SQL Server database.
+
+
+from flask import Flask, request, jsonify
+import face_recognition
+import base64
+import numpy as np
+from io import BytesIO
+from PIL import Image
+import pyodbc
+
+app = Flask(__name__)
+
+# Connect to your SQL Server database
+conn = pyodbc.connect(
+'Driver={ODBC Driver 17 for SQL Server};'
+'Server=217.76.53.78;'
+'Database=facebiometric;'
+'Uid=Khabrain2023;'
+'Pwd=7D5k%h4E6bof;'
+'Encrypt=Yes;'
+'TrustServerCertificate=Yes;'
+'Connection Timeout=30;'
+)
+cursor = conn.cursor()
+
+def base64_to_image(base64_str):
+    if base64_str.startswith("data:image"):
+        base64_str = base64_str.split(",")[1]
+    img_bytes = base64.b64decode(base64_str)
+    img = Image.open(BytesIO(img_bytes))
+    return np.array(img)
+
+@app.route('/test', methods=['GET'])
+def test():
+    return jsonify({"status": "API is running", "face_recognition": "installed"})
+
+@app.route('/verify_face', methods=['POST'])
+def verify_face():
+    data = request.get_json()
+    base64_img = data['image']
+
+    img = base64_to_image(base64_img)
+
+    # Detect face and get embedding
+    face_locations = face_recognition.face_locations(img)
+    if not face_locations:
+        return jsonify({"matchFound": False, "message": "No face detected"})
+
+    embedding = face_recognition.face_encodings(img, face_locations)[0]
+
+    # Load all embeddings from DB
+    cursor.execute("SELECT Id, FaceEmbedding FROM FaceImages WHERE FaceEmbedding IS NOT NULL")
+    rows = cursor.fetchall()
+
+    threshold = 0.6
+    for r in rows:
+        user_id = r[0]
+        db_embedding = np.frombuffer(r[1], dtype=np.float32)
+        dist = np.linalg.norm(embedding - db_embedding)
+        if dist < threshold:
+            return jsonify({"matchFound": True, "userId": user_id, "distance": float(dist)})
+
+    return jsonify({"matchFound": False})
+
+if __name__ == '__main__':
+    app.run(debug=True, host='0.0.0.0', port=5003)
+
+
+
+import pyodbc
+import base64
+import numpy as np
+from PIL import Image
+from io import BytesIO
+import face_recognition
+
+# Connect to DB
+conn = pyodbc.connect(
+'Driver={ODBC Driver 17 for SQL Server};'
+'Server=217.76.53.78;'
+'Database=facebiometric;'
+'Uid=Khabrain2023;'
+'Pwd=7D5k%h4E6bof;'
+'Encrypt=Yes;'
+'TrustServerCertificate=Yes;'
+'Connection Timeout=30;'
+)
+cursor = conn.cursor()
+
+# Get ALL images for processing
+cursor.execute("SELECT Id, ImageData FROM FaceImages")
+rows = cursor.fetchall()
+
+for row in rows:
+    image_id = row[0]
+    base64_image = row[1]
+
+    if base64_image.startswith("data:image"):
+        base64_image = base64_image.split(",")[1]
+
+    img_bytes = base64.b64decode(base64_image)
+    img = Image.open(BytesIO(img_bytes))
+    np_img = np.array(img)
+
+    face_locations = face_recognition.face_locations(np_img)
+    if not face_locations:
+        print(f"No face detected for Image ID {image_id}")
+        continue
+
+    embedding = face_recognition.face_encodings(np_img, face_locations)[0]
+    embedding_bytes = embedding.astype(np.float32).tobytes()
+
+    cursor.execute(
+        "UPDATE FaceImages SET FaceEmbedding = ? WHERE Id = ?",
+        (embedding_bytes, image_id)
+    )
+    conn.commit()
+    print(f"Updated embedding for Image ID {image_id}")
+
+print(f"All {len(rows)} images processed successfully!")
+
+
